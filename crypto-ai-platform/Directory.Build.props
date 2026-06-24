@@ -1,0 +1,15 @@
+<Project>
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <VersionPrefix>1.0.0</VersionPrefix>
+    <Authors>Crypto AI Platform Team</Authors>
+    <Company>Crypto AI Platform</Company>
+    <Product>Crypto AI Platform</Product>
+    <Copyright>Copyright © 2026</Copyright>
+  </PropertyGroup>
+</Project>

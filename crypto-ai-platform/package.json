@@ -1,0 +1,19 @@
+{
+  "name": "crypto-ai-platform",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Enterprise cryptocurrency quantitative trading platform",
+  "scripts": {
+    "dev:web": "pnpm --filter crypto-ai-platform-web dev",
+    "build:web": "pnpm --filter crypto-ai-platform-web build",
+    "dev:api": "cd apps/api-core && dotnet watch run",
+    "build:api": "dotnet build CryptoAIPlatform.sln",
+    "test": "dotnet test CryptoAIPlatform.sln",
+    "format:dotnet": "dotnet format CryptoAIPlatform.sln"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=9"
+  }
+}
