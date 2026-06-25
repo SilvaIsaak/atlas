@@ -182,4 +182,40 @@ public class AuthController : ControllerBase
         var result = await _mediator.Send(new DeleteUserCommand(userId));
         return Ok(result);
     }
+
+    [HttpGet("exchanges")]
+    [Authorize]
+    [ProducesResponseType(typeof(List<ExchangeDto>), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetExchanges()
+    {
+        var exchanges = new List<ExchangeDto>
+        {
+            new ExchangeDto(Guid.NewGuid(), "Binance", "BINANCE", "https://api.binance.com", "wss://stream.binance.com:9443", true)
+        };
+        return Ok(exchanges);
+    }
+
+    [HttpGet("users/{userId:guid}/exchanges")]
+    [Authorize]
+    [ProducesResponseType(typeof(List<ExchangeIntegrationDto>), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetUserExchangeIntegrations(Guid userId)
+    {
+        var result = await _mediator.Send(new GetUserExchangeIntegrationsQuery(userId));
+        return Ok(result);
+    }
+
+    [HttpPost("users/{userId:guid}/exchanges")]
+    [Authorize]
+    [ProducesResponseType(typeof(ExchangeIntegrationDto), StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> CreateExchangeIntegration(Guid userId, [FromBody] CreateExchangeIntegrationRequest request)
+    {
+        var command = new CreateExchangeIntegrationCommand(userId, request.ExchangeId, request.ApiKey, request.ApiSecret, request.Passphrase);
+        var result = await _mediator.Send(command);
+        return CreatedAtAction(nameof(GetUserExchangeIntegrations), new { userId }, result);
+    }
 }
+
+public record CreateExchangeIntegrationRequest(Guid ExchangeId, string ApiKey, string ApiSecret, string? Passphrase = null);
+
+public record ExchangeDto(Guid Id, string Name, string Code, string ApiBaseUrl, string WsUrl, bool IsActive);
