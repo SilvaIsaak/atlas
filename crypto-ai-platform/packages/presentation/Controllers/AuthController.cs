@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using CryptoAIPlatform.Application.IdentityAndAccess;
+using CryptoAIPlatform.Application.Wallets;
 
 namespace CryptoAIPlatform.Presentation.Controllers;
 
@@ -213,6 +214,25 @@ public class AuthController : ControllerBase
         var command = new CreateExchangeIntegrationCommand(userId, request.ExchangeId, request.ApiKey, request.ApiSecret, request.Passphrase);
         var result = await _mediator.Send(command);
         return CreatedAtAction(nameof(GetUserExchangeIntegrations), new { userId }, result);
+    }
+
+    [HttpGet("users/{userId:guid}/wallets")]
+    [Authorize]
+    [ProducesResponseType(typeof(WalletDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetWallet(Guid userId, [FromQuery] Guid? exchangeIntegrationId = null)
+    {
+        var result = await _mediator.Send(new GetWalletQuery(userId, exchangeIntegrationId));
+        return Ok(result);
+    }
+
+    [HttpPost("users/{userId:guid}/exchanges/{exchangeIntegrationId:guid}/wallets/sync")]
+    [Authorize]
+    [ProducesResponseType(typeof(WalletDto), StatusCodes.Status200OK)]
+    public async Task<IActionResult> SyncWalletBalances(Guid userId, Guid exchangeIntegrationId)
+    {
+        var result = await _mediator.Send(new SyncWalletBalancesCommand(userId, exchangeIntegrationId));
+        return Ok(result);
     }
 }
 

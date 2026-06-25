@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using CryptoAIPlatform.Domain.Abstractions;
 using CryptoAIPlatform.Domain.IdentityAndAccess;
 using CryptoAIPlatform.Domain.Exchanges;
+using CryptoAIPlatform.Domain.Wallets;
 
 namespace CryptoAIPlatform.Infrastructure.Data;
 
@@ -11,6 +12,8 @@ public class ApplicationDbContext : IdentityDbContext<User, Role, Guid>
     public DbSet<RolePermission> RolePermissions { get; set; }
     public DbSet<Exchange> Exchanges { get; set; }
     public DbSet<ExchangeIntegration> ExchangeIntegrations { get; set; }
+    public DbSet<Wallet> Wallets { get; set; }
+    public DbSet<WalletBalance> WalletBalances { get; set; }
     
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
