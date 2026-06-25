@@ -4,6 +4,22 @@ using CryptoAIPlatform.Domain.Abstractions;
 using CryptoAIPlatform.Domain.IdentityAndAccess;
 using CryptoAIPlatform.Domain.Exchanges;
 using CryptoAIPlatform.Domain.Wallets;
+using CryptoAIPlatform.Domain.Strategies;
+using CryptoAIPlatform.Domain.Backtesting;
+using CryptoAIPlatform.Domain.WalkForward;
+using CryptoAIPlatform.Domain.PaperTrading;
+using CryptoAIPlatform.Domain.RiskManagement;
+using CryptoAIPlatform.Domain.AIDecision;
+using CryptoAIPlatform.Domain.Execution;
+using CryptoAIPlatform.Domain.LiveTrading;
+using CryptoAIPlatform.Domain.Notifications;
+using CryptoAIPlatform.Domain.Monitoring;
+using CryptoAIPlatform.Domain.Learning;
+using CryptoAIPlatform.Domain.Deployment;
+using CryptoAIPlatform.Domain.Mobile;
+using CryptoAIPlatform.Domain.Reports;
+using CryptoAIPlatform.Domain.Admin;
+using CryptoAIPlatform.Domain.MultiTenant;
 
 namespace CryptoAIPlatform.Infrastructure.Data;
 
@@ -14,6 +30,24 @@ public class ApplicationDbContext : IdentityDbContext<User, Role, Guid>
     public DbSet<ExchangeIntegration> ExchangeIntegrations { get; set; }
     public DbSet<Wallet> Wallets { get; set; }
     public DbSet<WalletBalance> WalletBalances { get; set; }
+    public DbSet<Strategy> Strategies { get; set; }
+    public DbSet<Backtest> Backtests { get; set; }
+    public DbSet<WalkForward> WalkForwards { get; set; }
+    public DbSet<PaperTrade> PaperTrades { get; set; }
+    public DbSet<RiskProfile> RiskProfiles { get; set; }
+    public DbSet<AIDecision> AIDecisions { get; set; }
+    public DbSet<ExecutionEngine> ExecutionEngines { get; set; }
+    public DbSet<LiveTrade> LiveTrades { get; set; }
+    public DbSet<Notification> Notifications { get; set; }
+    public DbSet<SystemMetric> SystemMetrics { get; set; }
+    public DbSet<SystemAlert> SystemAlerts { get; set; }
+    public DbSet<LearningContent> LearningContents { get; set; }
+    public DbSet<UserLearningProgress> UserLearningProgresses { get; set; }
+    public DbSet<Deployment> Deployments { get; set; }
+    public DbSet<MobileDevice> MobileDevices { get; set; }
+    public DbSet<Report> Reports { get; set; }
+    public DbSet<AdminLog> AdminLogs { get; set; }
+    public DbSet<Tenant> Tenants { get; set; }
     
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)

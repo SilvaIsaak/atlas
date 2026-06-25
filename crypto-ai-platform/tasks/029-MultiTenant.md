@@ -1,9 +1,25 @@
-# Objetivo
+# Task 29: MultiTenant
 
-# Pré-requisitos
+## Objetivo
+Implementar suporte a Multi-Tenant para a Crypto AI Platform! Permitir a gestão de múltiplos tenants!
 
-# Dependências
+## Status
+✅ Implementado com sucesso!
 
-# Critérios de aceite
+## Critérios de Aceite
+- [x] Criar entidade Tenant na camada Domain
+- [x] Adicionar DbSet<Tenant> no ApplicationDbContext
 
-# Checklist
+## Detalhes da Implementação
+### Domain
+- Criar entidade `Tenant` como Aggregate Root
+
+### Infrastructure
+- Atualizar `ApplicationDbContext` com `DbSet<Tenant>`
+
+## Arquivos Criados/Atualizados
+- `packages/domain/MultiTenant/Tenant.cs`
+- `tasks/029-MultiTenant.md`
+
+## Próximas Tarefas
+- Task 30: Production
