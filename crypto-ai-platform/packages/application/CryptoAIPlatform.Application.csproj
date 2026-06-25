@@ -8,9 +8,11 @@
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" />
     <PackageReference Include="FluentValidation" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\domain\CryptoAIPlatform.Domain.csproj" />
+    <ProjectReference Include="..\infrastructure\CryptoAIPlatform.Infrastructure.csproj" />
   </ItemGroup>
 </Project>

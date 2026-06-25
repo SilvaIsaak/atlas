@@ -1,10 +1,17 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using CryptoAIPlatform.Domain.Abstractions;
+using CryptoAIPlatform.Domain.IdentityAndAccess;
+using CryptoAIPlatform.Domain.Exchanges;
 
 namespace CryptoAIPlatform.Infrastructure.Data;
 
-public class ApplicationDbContext : DbContext
+public class ApplicationDbContext : IdentityDbContext<User, Role, Guid>
 {
+    public DbSet<RolePermission> RolePermissions { get; set; }
+    public DbSet<Exchange> Exchanges { get; set; }
+    public DbSet<ExchangeIntegration> ExchangeIntegrations { get; set; }
+    
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
     {
@@ -13,6 +20,15 @@ public class ApplicationDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+        
+        modelBuilder.Entity<RolePermission>(entity =>
+        {
+            entity.HasKey(rp => new { rp.RoleId, rp.Permission });
+            entity.HasOne<Role>()
+                  .WithMany(r => r.RolePermissions)
+                  .HasForeignKey(rp => rp.RoleId);
+        });
+        
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
     }
 

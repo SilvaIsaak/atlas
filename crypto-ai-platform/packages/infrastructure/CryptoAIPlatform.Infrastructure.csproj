@@ -23,6 +23,9 @@
     <PackageReference Include="Polly" />
     <PackageReference Include="Polly.Extensions" />
     <PackageReference Include="Polly.Extensions.Http" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" />
   </ItemGroup>
 
   <ItemGroup>
