@@ -1,3 +1,5 @@
+using CryptoAIPlatform.Domain.Core.ValueObjects;
+
 namespace CryptoAIPlatform.Domain.Abstractions;
 
 public abstract class BaseEntity<TId> where TId : IEquatable<TId>
@@ -14,8 +16,11 @@ public abstract class BaseEntity<TId> where TId : IEquatable<TId>
     }
 
     public TId Id { get; protected init; } = default!;
+    public TenantId TenantId { get; protected set; } = null!;
     public DateTime CreatedAt { get; protected set; } = DateTime.UtcNow;
     public DateTime? UpdatedAt { get; protected set; }
+    public Guid? CreatedBy { get; protected set; }
+    public Guid? UpdatedBy { get; protected set; }
 
     public IReadOnlyCollection<DomainEvent> DomainEvents => _domainEvents.AsReadOnly();
 

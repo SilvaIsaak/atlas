@@ -20,11 +20,24 @@ using CryptoAIPlatform.Domain.Mobile;
 using CryptoAIPlatform.Domain.Reports;
 using CryptoAIPlatform.Domain.Admin;
 using CryptoAIPlatform.Domain.MultiTenant;
+using CryptoAIPlatform.Domain.Core.ValueObjects;
+using CryptoAIPlatform.Domain.QuantFoundation.MarketData;
+using CryptoAIPlatform.Domain.QuantFoundation.DataQuality;
+using CryptoAIPlatform.Domain.QuantFoundation.FeatureStore;
+using CryptoAIPlatform.Domain.QuantFoundation.ExperimentTracking;
+using CryptoAIPlatform.Domain.QuantFoundation.ResearchDataset;
+using CryptoAIPlatform.Domain.QuantFoundation.Reproducibility;
+using CryptoAIPlatform.Domain.QuantFoundation.MarketMicrostructure;
+using CryptoAIPlatform.Domain.QuantFoundation.ExecutionSimulator;
+using CryptoAIPlatform.Infrastructure.Data.Extensions;
 
 namespace CryptoAIPlatform.Infrastructure.Data;
 
 public class ApplicationDbContext : IdentityDbContext<User, Role, Guid>
 {
+    public static TenantId CurrentTenantId { get; set; } = null!;
+    public static Guid? CurrentUserId { get; set; }
+
     public DbSet<RolePermission> RolePermissions { get; set; }
     public DbSet<Exchange> Exchanges { get; set; }
     public DbSet<ExchangeIntegration> ExchangeIntegrations { get; set; }
@@ -48,6 +61,47 @@ public class ApplicationDbContext : IdentityDbContext<User, Role, Guid>
     public DbSet<Report> Reports { get; set; }
     public DbSet<AdminLog> AdminLogs { get; set; }
     public DbSet<Tenant> Tenants { get; set; }
+
+    // QuantFoundation - MarketData
+    public DbSet<MarketDataSource> MarketDataSources { get; set; }
+    public DbSet<MarketDataIngestionJob> MarketDataIngestionJobs { get; set; }
+    public DbSet<MarketDataAsset> MarketDataAssets { get; set; }
+
+    // QuantFoundation - DataQuality
+    public DbSet<DataQualityJob> DataQualityJobs { get; set; }
+    public DbSet<Anomaly> Anomalies { get; set; }
+
+    // QuantFoundation - FeatureStore
+    public DbSet<Feature> Features { get; set; }
+    public DbSet<FeatureVersion> FeatureVersions { get; set; }
+    public DbSet<FeatureCatalogEntry> FeatureCatalogEntries { get; set; }
+    public DbSet<FeatureLineage> FeatureLineages { get; set; }
+
+    // QuantFoundation - ExperimentTracking
+    public DbSet<Experiment> Experiments { get; set; }
+    public DbSet<ExperimentParameter> ExperimentParameters { get; set; }
+    public DbSet<ExperimentRun> ExperimentRuns { get; set; }
+    public DbSet<ExperimentMetric> ExperimentMetrics { get; set; }
+    public DbSet<ExperimentArtifact> ExperimentArtifacts { get; set; }
+
+    // QuantFoundation - ResearchDataset
+    public DbSet<ResearchDataset> ResearchDatasets { get; set; }
+    public DbSet<DatasetVersion> DatasetVersions { get; set; }
+    public DbSet<DatasetTransformation> DatasetTransformations { get; set; }
+
+    // QuantFoundation - Reproducibility
+    public DbSet<ReproducibilityPackage> ReproducibilityPackages { get; set; }
+
+    // QuantFoundation - MarketMicrostructure
+    public DbSet<MarketMicrostructureModel> MarketMicrostructureModels { get; set; }
+    public DbSet<SpreadData> SpreadData { get; set; }
+    public DbSet<SlippageModel> SlippageModels { get; set; }
+    public DbSet<LiquidityProfile> LiquidityProfiles { get; set; }
+
+    // QuantFoundation - ExecutionSimulator
+    public DbSet<ExecutionSimulation> ExecutionSimulations { get; set; }
+    public DbSet<SimulatedOrder> SimulatedOrders { get; set; }
+    public DbSet<SimulatedFill> SimulatedFills { get; set; }
     
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
@@ -83,13 +137,16 @@ public class ApplicationDbContext : IdentityDbContext<User, Role, Guid>
 
         foreach (var entry in entries)
         {
+            var entity = (BaseEntity<Guid>)entry.Entity;
             if (entry.State == EntityState.Added)
             {
-                ((BaseEntity<Guid>)entry.Entity).CreatedAt = DateTime.UtcNow;
+                entity.CreatedAt = DateTime.UtcNow;
+                entity.CreatedBy = CurrentUserId;
             }
             else if (entry.State == EntityState.Modified)
             {
-                ((BaseEntity<Guid>)entry.Entity).UpdatedAt = DateTime.UtcNow;
+                entity.UpdatedAt = DateTime.UtcNow;
+                entity.UpdatedBy = CurrentUserId;
             }
         }
     }

@@ -39,8 +39,10 @@
     <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.10.0" />
     <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.10.0" />
 
-    <!-- Redis & Kafka -->
+    <!-- Redis, RabbitMQ & Kafka -->
     <PackageVersion Include="StackExchange.Redis" Version="2.10.0" />
+    <PackageVersion Include="RabbitMQ.Client" Version="7.0.0" />
+    <PackageVersion Include="Npgsql.TimescaleDB" Version="1.0.0" />
     <PackageVersion Include="Confluent.Kafka" Version="2.6.0" />
     <PackageVersion Include="Confluent.SchemaRegistry.Serdes.Avro" Version="2.6.0" />
 

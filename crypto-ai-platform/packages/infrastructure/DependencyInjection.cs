@@ -9,8 +9,11 @@ using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 using Serilog;
+using RabbitMQ.Client;
 using CryptoAIPlatform.Infrastructure.Data;
+using CryptoAIPlatform.Infrastructure.EventBus;
 using CryptoAIPlatform.Domain.IdentityAndAccess;
+using CryptoAIPlatform.Domain.Core.Abstractions.Events;
 using CryptoAIPlatform.Infrastructure.Services;
 using CryptoAIPlatform.Infrastructure.Exchanges;
 
@@ -103,6 +106,24 @@ public static class DependencyInjection
             options.Configuration = redisConnectionString;
             options.InstanceName = "CryptoAIPlatform_";
         });
+
+        // Event Bus Configuration (RabbitMQ)
+        var rabbitMQHost = configuration["RabbitMQ:Host"] ?? "localhost";
+        var rabbitMQPort = int.Parse(configuration["RabbitMQ:Port"] ?? "5672");
+        var rabbitMQUser = configuration["RabbitMQ:UserName"] ?? "guest";
+        var rabbitMQPassword = configuration["RabbitMQ:Password"] ?? "guest";
+
+        var factory = new ConnectionFactory
+        {
+            HostName = rabbitMQHost,
+            Port = rabbitMQPort,
+            UserName = rabbitMQUser,
+            Password = rabbitMQPassword
+        };
+
+        services.AddSingleton<IConnection>(factory.CreateConnection());
+        services.AddSingleton<IEventSerializer, JsonEventSerializer>();
+        services.AddSingleton<IEventBus, RabbitMQEventBus>();
 
         services.AddScoped<IJwtTokenService, JwtTokenService>();
         services.AddScoped<IExchangeClientFactory, ExchangeClientFactory>();
