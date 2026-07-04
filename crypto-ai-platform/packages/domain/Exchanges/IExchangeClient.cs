@@ -102,3 +102,85 @@ public record ExchangeBalance
     public decimal Locked { get; init; }
     public decimal Total { get; init; }
 }
+
+public record ExchangeInfo
+{
+    public long Timezone { get; init; }
+    public long ServerTime { get; init; }
+    public List<ExchangeRateLimit> RateLimits { get; init; } = new();
+    public List<ExchangeSymbol> Symbols { get; init; } = new();
+}
+
+public record ExchangeRateLimit
+{
+    public string RateLimitType { get; init; } = string.Empty;
+    public string Interval { get; init; } = string.Empty;
+    public int IntervalNum { get; init; }
+    public int Limit { get; init; }
+}
+
+public record ExchangeSymbol
+{
+    public string Name { get; init; } = string.Empty;
+    public string Status { get; init; } = string.Empty;
+    public string BaseAsset { get; init; } = string.Empty;
+    public int BaseAssetPrecision { get; init; }
+    public string QuoteAsset { get; init; } = string.Empty;
+    public int QuotePrecision { get; init; }
+    public List<string> OrderTypes { get; init; } = new();
+}
+
+public record ExchangeTrade
+{
+    public long Id { get; init; }
+    public decimal Price { get; init; }
+    public decimal Quantity { get; init; }
+    public DateTime Time { get; init; }
+    public bool IsBuyerMaker { get; init; }
+}
+
+public record Exchange24hStatistics
+{
+    public string Symbol { get; init; } = string.Empty;
+    public decimal PriceChange { get; init; }
+    public decimal PriceChangePercent { get; init; }
+    public decimal LastPrice { get; init; }
+    public decimal OpenPrice { get; init; }
+    public decimal HighPrice { get; init; }
+    public decimal LowPrice { get; init; }
+    public decimal Volume { get; init; }
+    public decimal QuoteVolume { get; init; }
+    public DateTime OpenTime { get; init; }
+    public DateTime CloseTime { get; init; }
+    public long FirstTradeId { get; init; }
+    public long LastTradeId { get; init; }
+    public int TradeCount { get; init; }
+}
+
+public record FundingRateData
+{
+    public string Symbol { get; init; } = string.Empty;
+    public decimal FundingRate { get; init; }
+    public DateTime FundingTime { get; init; }
+}
+
+public record OpenInterestData
+{
+    public string Symbol { get; init; } = string.Empty;
+    public decimal OpenInterest { get; init; }
+    public DateTime Time { get; init; }
+}
+
+public record MarkPriceData
+{
+    public string Symbol { get; init; } = string.Empty;
+    public decimal MarkPrice { get; init; }
+    public DateTime Time { get; init; }
+}
+
+public record IndexPriceData
+{
+    public string Symbol { get; init; } = string.Empty;
+    public decimal IndexPrice { get; init; }
+    public DateTime Time { get; init; }
+}

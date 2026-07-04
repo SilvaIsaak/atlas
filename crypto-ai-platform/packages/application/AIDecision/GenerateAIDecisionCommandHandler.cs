@@ -1,5 +1,6 @@
 using MediatR;
 using CryptoAIPlatform.Domain.AIDecision;
+using DomainAIDecision = CryptoAIPlatform.Domain.AIDecision.AIDecision;
 using CryptoAIPlatform.Infrastructure.Data;
 
 namespace CryptoAIPlatform.Application.AIDecision;
@@ -21,9 +22,8 @@ public class GenerateAIDecisionCommandHandler : IRequestHandler<GenerateAIDecisi
         var selectedDecision = decisionTypes[random.Next(decisionTypes.Length)];
         var confidence = (decimal)(random.NextDouble() * 0.5 + 0.5); // 0.5 to 1.0
 
-        var aiDecision = new AIDecision
+        var aiDecision = new DomainAIDecision
         {
-            Id = Guid.NewGuid(),
             UserId = request.UserId,
             StrategyId = request.StrategyId,
             Symbol = request.Symbol,

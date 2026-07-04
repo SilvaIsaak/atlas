@@ -1,42 +1,14 @@
-# TASK 033 — AUTO REVIEW
-**Data**: 2026-06-26  
-**Status**: CONCLUÍDA
-
----
-
-## 1. Arquitetura
-✅ Clean Architecture
-✅ DDD
-✅ CQRS
-✅ Event Driven
-✅ SOLID
-
----
-
-## 2. Segurança
-✅ Multi-Tenancy com RLS
-✅ Audit Fields
-✅ Secrets prontos para criptografia
-
----
-
-## 3. Performance
-✅ EF Core com Split Query
-✅ Índices em TenantId
-✅ TimescaleDB preparado
-
----
-
-## 4. Escalabilidade
-✅ Estrutura para scale-out com timescaledb
-✅ RLS permite sharding por tenant
-
----
-
-## 5. Observabilidade
-✅ EF Core com OpenTelemetry (configurado em `DependencyInjection.cs`)
-
----
-
-## 6. Testabilidade
-✅ DbContext pode ser mockado para testes de integração
+# Auto Review Report - TASK 040
+- ✅ Domain
+  - Aggregate Root: ResearchDataset
+  - Child entities DatasetVersion, Snapshot, Partition, etc.
+  - Domain Events: Yes, DatasetCreated, DatasetPublished etc.
+- ✅ Application CQRS
+  - Commands: Yes, Queries: Yes
+  - Handlers: Yes
+- ✅ Infrastructure
+  - Repositories implemented
+  - EF Configurations for entities
+- ✅ Observability
+  - ILogger used
+  - OpenTelemetry ready

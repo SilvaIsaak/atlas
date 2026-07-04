@@ -17,7 +17,6 @@ public class CreateBacktestCommandHandler : IRequestHandler<CreateBacktestComman
     {
         var backtest = new Backtest
         {
-            Id = Guid.NewGuid(),
             UserId = request.UserId,
             StrategyId = request.StrategyId,
             Name = request.Name,

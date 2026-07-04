@@ -21,6 +21,4 @@ public class ExchangeIntegration : BaseEntity<Guid>
     public string ApiSecret { get; set; } = string.Empty;
     public string? Passphrase { get; set; }
     public bool IsActive { get; set; } = true;
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    public DateTime? UpdatedAt { get; set; }
 }

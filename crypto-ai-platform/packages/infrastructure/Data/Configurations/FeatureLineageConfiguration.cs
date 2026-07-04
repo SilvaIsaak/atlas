@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using CryptoAIPlatform.Domain.QuantFoundation.FeatureStore;
+using CryptoAIPlatform.Infrastructure.Data.Extensions;
 
 namespace CryptoAIPlatform.Infrastructure.Data.Configurations;
 

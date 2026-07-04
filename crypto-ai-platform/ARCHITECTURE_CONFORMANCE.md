@@ -1,32 +1,6 @@
-# TASK 033 — ARCHITECTURE CONFORMANCE REPORT
-**Data**: 2026-06-26  
-**Status**: CONCLUÍDA
-
----
-
-## 1. Clean Architecture
-✅ Infrastructure Layer implementa persistência (EF Core)
-✅ Domain Layer contém apenas abstrações de repositório
-✅ Application Layer não é violado
-✅ Separação de responsabilidades respeitada
-
----
-
-## 2. DDD
-✅ Aggregates configurados com relações corretas (ex: `MarketDataSource` → `MarketDataIngestionJob`)
-✅ Value Objects usando JSON conversion para persistência
-
----
-
-## 3. CQRS
-✅ Estrutura preparada para comandos e queries (DbSets prontos)
-✅ Repositórios definidos
-
----
-
-## 4. SOLID
-✅ SRP: Cada configuração de entidade tem responsabilidade única
-✅ OCP: Configurações via fluent API (abertas para extensão)
-✅ LSP: Entidades herdam de BaseEntity corretamente
-✅ ISP: Interfaces de repositório específicas
-✅ DIP: Application e Domain dependem de abstrações
+# Architecture Conformance Report - TASK 040
+## ✅ Clean Architecture - Conforms
+- Domain: Models, Events, Repositories and Services defined in Domain layer.
+- Application: Commands, Queries, Handlers in Application layer.
+- Infrastructure: Repositories and Services in Infrastructure layer.
+- No violations of layer dependencies.

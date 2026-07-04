@@ -1,5 +1,6 @@
 using MediatR;
 using CryptoAIPlatform.Domain.WalkForward;
+using DomainWalkForward = CryptoAIPlatform.Domain.WalkForward.WalkForward;
 using CryptoAIPlatform.Infrastructure.Data;
 
 namespace CryptoAIPlatform.Application.WalkForward;
@@ -15,9 +16,8 @@ public class CreateWalkForwardCommandHandler : IRequestHandler<CreateWalkForward
 
     public async Task<CreateWalkForwardResponse> Handle(CreateWalkForwardCommand request, CancellationToken cancellationToken)
     {
-        var walkForward = new WalkForward
+        var walkForward = new DomainWalkForward
         {
-            Id = Guid.NewGuid(),
             UserId = request.UserId,
             StrategyId = request.StrategyId,
             Name = request.Name,

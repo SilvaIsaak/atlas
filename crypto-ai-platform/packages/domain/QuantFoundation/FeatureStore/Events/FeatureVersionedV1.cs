@@ -6,12 +6,12 @@ namespace CryptoAIPlatform.Domain.QuantFoundation.FeatureStore.Events;
 public class FeatureVersionedV1 : DomainEvent
 {
     public Guid FeatureId { get; init; }
-    public string Version { get; init; } = string.Empty;
+    public string FeatureVersion { get; init; } = string.Empty;
 
-    public FeatureVersionedV1(TenantId tenantId, Guid featureId, string version)
+    public FeatureVersionedV1(TenantId tenantId, Guid featureId, string featureVersion)
     {
         TenantId = tenantId;
         FeatureId = featureId;
-        Version = version;
+        FeatureVersion = featureVersion;
     }
 }

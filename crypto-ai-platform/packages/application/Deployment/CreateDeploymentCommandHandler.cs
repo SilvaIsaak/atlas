@@ -1,5 +1,6 @@
 using MediatR;
 using CryptoAIPlatform.Domain.Deployment;
+using DomainDeployment = CryptoAIPlatform.Domain.Deployment.Deployment;
 using CryptoAIPlatform.Infrastructure.Data;
 
 namespace CryptoAIPlatform.Application.Deployment;
@@ -15,9 +16,8 @@ public class CreateDeploymentCommandHandler : IRequestHandler<CreateDeploymentCo
 
     public async Task<CreateDeploymentResponse> Handle(CreateDeploymentCommand request, CancellationToken cancellationToken)
     {
-        var deployment = new Deployment
+        var deployment = new DomainDeployment
         {
-            Id = Guid.NewGuid(),
             Version = request.Version,
             Description = request.Description,
             BuildNumber = request.BuildNumber,

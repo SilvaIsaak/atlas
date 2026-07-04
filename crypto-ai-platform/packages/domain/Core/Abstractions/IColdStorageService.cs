@@ -1,9 +1,12 @@
+using System.IO;
+using CryptoAIPlatform.Domain.Core.ValueObjects;
+
 namespace CryptoAIPlatform.Domain.Core.Abstractions;
 
 public interface IColdStorageService
 {
-    Task UploadAsync(string path, byte[] data, CancellationToken cancellationToken = default);
-    Task<byte[]> DownloadAsync(string path, CancellationToken cancellationToken = default);
-    Task<bool> ExistsAsync(string path, CancellationToken cancellationToken = default);
-    Task DeleteAsync(string path, CancellationToken cancellationToken = default);
+    Task UploadAsync(TenantId tenantId, string path, Stream content, CancellationToken cancellationToken = default);
+    Task<Stream?> DownloadAsync(TenantId tenantId, string path, CancellationToken cancellationToken = default);
+    Task<bool> ExistsAsync(TenantId tenantId, string path, CancellationToken cancellationToken = default);
+    Task DeleteAsync(TenantId tenantId, string path, CancellationToken cancellationToken = default);
 }

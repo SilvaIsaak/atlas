@@ -1,9 +1,10 @@
 using MediatR;
 using CryptoAIPlatform.Domain.News;
+using NewsModel = CryptoAIPlatform.Domain.News.News;
 
 namespace CryptoAIPlatform.Application.News;
 
-public record AnalyzeNewsSentimentCommand(News News) : IRequest<NewsAnalysis>;
+public record AnalyzeNewsSentimentCommand(NewsModel News) : IRequest<NewsAnalysis>;
 
 public class AnalyzeNewsSentimentCommandHandler : IRequestHandler<AnalyzeNewsSentimentCommand, NewsAnalysis>
 {

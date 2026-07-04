@@ -4,7 +4,7 @@ using MediatR;
 namespace CryptoAIPlatform.Application.Behaviors;
 
 public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-    where TRequest : notnull
+    where TRequest : notnull, IRequest<TResponse>
 {
     private readonly IEnumerable<IValidator<TRequest>> _validators;
 

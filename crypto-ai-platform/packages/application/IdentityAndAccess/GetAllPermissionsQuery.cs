@@ -1,4 +1,5 @@
 using MediatR;
+using CryptoAIPlatform.Domain.IdentityAndAccess;
 
 namespace CryptoAIPlatform.Application.IdentityAndAccess;
 
