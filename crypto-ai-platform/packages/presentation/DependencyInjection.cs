@@ -3,6 +3,7 @@ using Asp.Versioning.ApiExplorer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 namespace CryptoAIPlatform.Presentation;
 
@@ -10,7 +11,7 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddPresentationServices(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddControllers().AddNewtonsoftJson();
+        services.AddControllers();
 
         services.AddApiVersioning(options =>
         {
@@ -44,6 +45,14 @@ public static class DependencyInjection
                         Name = "Crypto AI Platform Team"
                     }
                 });
+            }
+
+            // Include XML comments
+            var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+            if (File.Exists(xmlPath))
+            {
+                options.IncludeXmlComments(xmlPath);
             }
         });
 

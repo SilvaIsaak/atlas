@@ -31,8 +31,8 @@ public class SyncWalletBalancesCommandHandler : IRequestHandler<SyncWalletBalanc
             throw new Exception("Exchange integration not found");
         }
 
-        var client = _exchangeClientFactory.GetClient(integration.Exchange!.Code, integration.ApiKey, integration.ApiSecret, integration.Passphrase);
-        var balances = await client.GetBalancesAsync(cancellationToken);
+        var client = _exchangeClientFactory.CreateClient(integration.Exchange!.Code, integration.ApiKey, integration.ApiSecret, integration.Passphrase);
+        var balances = await client.TradingService.GetBalancesAsync(cancellationToken);
 
         var wallet = await _context.Wallets
             .Include(w => w.Balances)

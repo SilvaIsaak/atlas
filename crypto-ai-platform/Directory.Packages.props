@@ -10,6 +10,7 @@
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0" />
     <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.0" />
     
     <!-- Identity & Authentication -->
     <PackageVersion Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.0" />
@@ -44,7 +45,7 @@
 
     <!-- Redis, RabbitMQ & Kafka -->
     <PackageVersion Include="StackExchange.Redis" Version="2.10.1" />
-    <PackageVersion Include="RabbitMQ.Client" Version="7.0.0" />
+    <PackageVersion Include="RabbitMQ.Client" Version="6.8.1" />
     <PackageVersion Include="Confluent.Kafka" Version="2.6.0" />
     <PackageVersion Include="Confluent.SchemaRegistry.Serdes.Avro" Version="2.6.0" />
 

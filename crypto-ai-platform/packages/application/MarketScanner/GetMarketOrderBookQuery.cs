@@ -18,6 +18,6 @@ public class GetMarketOrderBookQueryHandler : IRequestHandler<GetMarketOrderBook
     public async Task<ExchangeOrderBook> Handle(GetMarketOrderBookQuery request, CancellationToken cancellationToken)
     {
         var client = _exchangeClientFactory.CreateClient(request.ExchangeCode, "", ""); // Public endpoint doesn't need API keys
-        return await client.GetOrderBookAsync(request.Symbol, request.Limit, cancellationToken);
+        return await client.MarketDataService.GetOrderBookAsync(request.Symbol, request.Limit, cancellationToken);
     }
 }

@@ -18,6 +18,6 @@ public class GetMarketTickerQueryHandler : IRequestHandler<GetMarketTickerQuery,
     public async Task<ExchangeTicker> Handle(GetMarketTickerQuery request, CancellationToken cancellationToken)
     {
         var client = _exchangeClientFactory.CreateClient(request.ExchangeCode, "", ""); // Public endpoint doesn't need API keys
-        return await client.GetTickerAsync(request.Symbol, cancellationToken);
+        return await client.MarketDataService.GetTickerAsync(request.Symbol, cancellationToken);
     }
 }

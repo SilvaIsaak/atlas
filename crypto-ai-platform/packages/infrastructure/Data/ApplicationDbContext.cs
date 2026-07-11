@@ -14,9 +14,28 @@ using CryptoAIPlatform.Domain.QuantFoundation.MarketMicrostructure;
 using CryptoAIPlatform.Domain.QuantFoundation.ExecutionSimulator;
 using CryptoAIPlatform.Domain.Risk;
 using CryptoAIPlatform.Domain.Trading;
+using CryptoAIPlatform.Domain.PortfolioAnalytics;
+using CryptoAIPlatform.Domain.Admin;
+using CryptoAIPlatform.Domain.AIDecision;
+using CryptoAIPlatform.Domain.Backtesting;
+using CryptoAIPlatform.Domain.Wallets;
+using CryptoAIPlatform.Domain.WalkForward;
+using CryptoAIPlatform.Domain.Notifications;
+using CryptoAIPlatform.Domain.Reports;
+using CryptoAIPlatform.Domain.Monitoring;
+using CryptoAIPlatform.Domain.Learning;
+using CryptoAIPlatform.Domain.Deployment;
+using CryptoAIPlatform.Domain.Execution;
+using CryptoAIPlatform.Domain.Exchanges;
+using CryptoAIPlatform.Domain.Strategies;
 using CryptoAIPlatform.Infrastructure.Data.Extensions;
 using CryptoAIPlatform.Infrastructure.Data.Configurations;
 using System.Linq.Expressions;
+
+// NOTE: alguns configs são excluídos por fase via csproj; manter referência direta aqui pode falhar
+// se a classe não existir/for removida do compilação. A configuração abaixo deve compilar somente
+// com as configs disponíveis na fase atual.
+
 
 namespace CryptoAIPlatform.Infrastructure.Data;
 
@@ -28,8 +47,11 @@ public class ApplicationDbContext : IdentityDbContext<User, Role, Guid>
     public DbSet<RolePermission> RolePermissions { get; set; }
     public DbSet<Tenant> Tenants { get; set; }
 
+
+
     // QuantFoundation - MarketData
     public DbSet<MarketDataSource> MarketDataSources { get; set; }
+
     public DbSet<MarketDataIngestionJob> MarketDataIngestionJobs { get; set; }
     public DbSet<MarketDataAsset> MarketDataAssets { get; set; }
     public DbSet<Candle> Candles { get; set; }
@@ -131,6 +153,20 @@ public class ApplicationDbContext : IdentityDbContext<User, Role, Guid>
     public DbSet<DrawdownSnapshot> DrawdownSnapshots { get; set; }
     public DbSet<MarginRequirement> MarginRequirements { get; set; }
     public DbSet<LiquidationLevel> LiquidationLevels { get; set; }
+
+    // Portfolio Analytics
+    public DbSet<PortfolioPerformanceReport> PortfolioPerformanceReports { get; set; }
+    public DbSet<PerformanceSnapshot> PerformanceSnapshots { get; set; }
+    public DbSet<EquityCurvePoint> EquityCurvePoints { get; set; }
+    public DbSet<DrawdownPoint> DrawdownPoints { get; set; }
+    public DbSet<BenchmarkComparison> BenchmarkComparisons { get; set; }
+    
+    // AI Strategy Engine
+    public DbSet<Strategy> Strategies { get; set; }
+    public DbSet<StrategyVersion> StrategyVersions { get; set; }
+    public DbSet<StrategyExecution> StrategyExecutions { get; set; }
+    public DbSet<StrategyResult> StrategyResults { get; set; }
+    public DbSet<StrategySignal> StrategySignals { get; set; }
     
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
@@ -230,7 +266,12 @@ public class ApplicationDbContext : IdentityDbContext<User, Role, Guid>
         modelBuilder.ApplyConfiguration(new PositionConfiguration());
         modelBuilder.ApplyConfiguration(new PortfolioConfiguration());
         modelBuilder.ApplyConfiguration(new PortfolioSnapshotConfiguration());
-        modelBuilder.ApplyConfiguration(new RiskProfileConfiguration());
+        // RiskProfileConfiguration é aplicado somente se disponível na fase atual.
+        // (evita falhas de build quando o arquivo/config é excluído via csproj por fase)
+        // applied only when the configuration type is available at compile time.
+        // If the config file is excluded via csproj for the current phase, this must not reference it.
+        // (Because we target Phase 0 baseline stability.)
+        // modelBuilder.ApplyConfiguration(new RiskProfileConfiguration());
         modelBuilder.ApplyConfiguration(new TradeExecutionConfiguration());
         modelBuilder.ApplyConfiguration(new OrderFillConfiguration());
         modelBuilder.ApplyConfiguration(new OrderFeeConfiguration());
@@ -254,5 +295,19 @@ public class ApplicationDbContext : IdentityDbContext<User, Role, Guid>
         modelBuilder.ApplyConfiguration(new DrawdownSnapshotEntityConfiguration());
         modelBuilder.ApplyConfiguration(new MarginRequirementEntityConfiguration());
         modelBuilder.ApplyConfiguration(new LiquidationLevelEntityConfiguration());
+
+        // Portfolio Analytics configurations
+        modelBuilder.ApplyConfiguration(new PortfolioPerformanceReportConfiguration());
+        modelBuilder.ApplyConfiguration(new PerformanceSnapshotConfiguration());
+        modelBuilder.ApplyConfiguration(new EquityCurvePointConfiguration());
+        modelBuilder.ApplyConfiguration(new DrawdownPointConfiguration());
+        modelBuilder.ApplyConfiguration(new BenchmarkComparisonConfiguration());
+        
+        // AI Strategy Engine configurations
+        modelBuilder.ApplyConfiguration(new StrategyConfiguration());
+        modelBuilder.ApplyConfiguration(new StrategyVersionConfiguration());
+        modelBuilder.ApplyConfiguration(new StrategyExecutionConfiguration());
+        modelBuilder.ApplyConfiguration(new StrategyResultConfiguration());
+        modelBuilder.ApplyConfiguration(new StrategySignalConfiguration());
     }
 }

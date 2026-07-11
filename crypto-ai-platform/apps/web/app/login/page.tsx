@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useAuthStore } from '@/lib/stores/useAuthStore';
 import { useRouter } from 'next/navigation';
+import { authService } from '@/lib/services/auth';
 
 const loginSchema = z.object({
   email: z.string().email(),
@@ -35,17 +36,20 @@ export default function LoginPage() {
 
   const onSubmit = async (data: LoginFormValues) => {
     try {
-      const response = await fetch('http://localhost:5000/api/v1/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-
-      if (!response.ok) throw new Error('Login failed');
-
-      const result = await response.json();
-      login(result, result.accessToken, result.refreshToken);
-      router.push('/');
+      const result = await authService.login(data);
+      login(
+        {
+          userId: result.userId,
+          email: result.email,
+          userName: result.userName,
+          firstName: result.firstName,
+          lastName: result.lastName,
+          roles: result.roles,
+        },
+        result.accessToken,
+        result.refreshToken
+      );
+      router.push('/dashboard');
     } catch (error) {
       console.error('Login error:', error);
     }

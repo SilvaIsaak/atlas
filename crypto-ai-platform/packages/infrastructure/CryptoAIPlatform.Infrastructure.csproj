@@ -14,6 +14,7 @@
     <PackageReference Include="StackExchange.Redis" />
     <PackageReference Include="AWSSDK.S3" />
     <PackageReference Include="Azure.Storage.Blobs" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,7 +25,6 @@
     <Compile Remove="Observability\**\*.cs" />
     <Compile Remove="Resilience\**\*.cs" />
     <Compile Remove="Workers\**\*.cs" />
-    <Compile Remove="DependencyInjection.cs" />
     <Compile Remove="HealthChecks.cs" />
     <Compile Remove="Data\Repositories\**\*.cs" />
     <Compile Remove="Data\Configurations\ReportConfiguration.cs" />

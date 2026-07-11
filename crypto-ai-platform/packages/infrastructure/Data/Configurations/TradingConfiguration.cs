@@ -113,7 +113,7 @@ public class PortfolioSnapshotConfiguration : IEntityTypeConfiguration<Portfolio
     }
 }
 
-public class RiskProfileConfiguration : IEntityTypeConfiguration<RiskProfile>
+public class TradingRiskProfileConfiguration : IEntityTypeConfiguration<RiskProfile>
 {
     public void Configure(EntityTypeBuilder<RiskProfile> builder)
     {

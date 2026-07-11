@@ -50,7 +50,8 @@ public class GetReproducibilityPackagesByRunIdQueryHandler : IRequestHandler<Get
     {
         _logger.LogInformation("Getting reproducibility packages for experiment run {RunId}", request.ExperimentRunId);
         
-        var packages = await _repository.GetByExperimentRunIdAsync(TenantId.Default, request.ExperimentRunId, cancellationToken);
+        var package = await _repository.GetByExperimentRunIdAsync(request.ExperimentRunId, cancellationToken);
+        var packages = package == null ? Array.Empty<ReproducibilityPackage>() : new[] { package };
         
         return packages.Select(p => new ReproducibilityPackageDto(
             Id: p.Id,

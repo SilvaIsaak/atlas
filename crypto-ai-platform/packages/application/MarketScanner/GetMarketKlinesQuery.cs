@@ -20,6 +20,6 @@ public class GetMarketKlinesQueryHandler : IRequestHandler<GetMarketKlinesQuery,
         var client = _exchangeClientFactory.CreateClient(request.ExchangeCode, "", ""); // Public endpoint doesn't need API keys
         var startTime = request.StartTime ?? DateTime.UtcNow.AddDays(-7);
         var endTime = request.EndTime ?? DateTime.UtcNow;
-        return await client.GetKlinesAsync(request.Symbol, request.Interval, startTime, endTime, cancellationToken);
+        return await client.MarketDataService.GetKlinesAsync(request.Symbol, request.Interval, startTime, endTime, cancellationToken);
     }
 }

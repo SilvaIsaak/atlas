@@ -11,6 +11,35 @@
   </ItemGroup>
 
   <ItemGroup>
+    <!-- Exclude non-Phase-0 application files -->
+    <Compile Remove="AIDecision\**\*.cs" />
+    <Compile Remove="Admin\**\*.cs" />
+    <Compile Remove="Backtesting\**\*.cs" />
+    <Compile Remove="Deployment\**\*.cs" />
+    <Compile Remove="Execution\**\*.cs" />
+    <Compile Remove="Learning\**\*.cs" />
+    <Compile Remove="LiveTrading\**\*.cs" />
+    <Compile Remove="Mobile\**\*.cs" />
+    <Compile Remove="Monitoring\**\*.cs" />
+    <Compile Remove="News\**\*.cs" />
+    <Compile Remove="Notifications\**\*.cs" />
+    <Compile Remove="PaperTrading\**\*.cs" />
+    <Compile Remove="PortfolioAnalytics\**\*.cs" />
+    <Compile Remove="Reports\**\*.cs" />
+    <Compile Remove="Reproducibility\**\*.cs" />
+    <Compile Remove="Research\**\*.cs" />
+    <Compile Remove="ResearchDataset\**\*.cs" />
+    <Compile Remove="RiskManagement\**\*.cs" />
+    <Compile Remove="Strategies\**\*.cs" />
+    <Compile Remove="WalkForward\**\*.cs" />
+    <Compile Remove="Wallets\**\*.cs" />
+    <Compile Remove="IdentityAndAccess\CreateExchangeIntegrationCommand.cs" />
+    <Compile Remove="IdentityAndAccess\CreateExchangeIntegrationCommandHandler.cs" />
+    <Compile Remove="IdentityAndAccess\GetUserExchangeIntegrationsQuery.cs" />
+    <Compile Remove="Dashboard\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\domain\CryptoAIPlatform.Domain.csproj" />
     <ProjectReference Include="..\infrastructure\CryptoAIPlatform.Infrastructure.csproj" />
     <ProjectReference Include="..\shared\CryptoAIPlatform.Shared.csproj" />

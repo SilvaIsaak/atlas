@@ -1,6 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -8,6 +10,28 @@
     <PackageReference Include="Swashbuckle.AspNetCore" />
     <PackageReference Include="Asp.Versioning.Mvc" />
     <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Exclude non-Phase 0 controllers -->
+    <Compile Remove="Controllers\AIDecisionController.cs" />
+    <Compile Remove="Controllers\AdminController.cs" />
+    <Compile Remove="Controllers\BacktestingController.cs" />
+    <Compile Remove="Controllers\DashboardController.cs" />
+    <Compile Remove="Controllers\DeploymentController.cs" />
+    <Compile Remove="Controllers\ExecutionController.cs" />
+    <Compile Remove="Controllers\LearningController.cs" />
+    <Compile Remove="Controllers\LiveTradingController.cs" />
+    <Compile Remove="Controllers\MobileController.cs" />
+    <Compile Remove="Controllers\MonitoringController.cs" />
+    <Compile Remove="Controllers\NewsController.cs" />
+    <Compile Remove="Controllers\NotificationsController.cs" />
+    <Compile Remove="Controllers\PaperTradingController.cs" />
+    <Compile Remove="Controllers\ReportsController.cs" />
+    <Compile Remove="Controllers\ResearchController.cs" />
+    <Compile Remove="Controllers\RiskController.cs" />
+    <Compile Remove="Controllers\StrategiesController.cs" />
+    <Compile Remove="Controllers\WalkForwardController.cs" />
   </ItemGroup>
 
   <ItemGroup>

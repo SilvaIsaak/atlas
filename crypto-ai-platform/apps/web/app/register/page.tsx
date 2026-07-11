@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useRouter } from 'next/navigation';
+import { authService } from '@/lib/services/auth';
 
 const registerSchema = z.object({
   firstName: z.string().min(1),
@@ -39,14 +40,7 @@ export default function RegisterPage() {
 
   const onSubmit = async (data: RegisterFormValues) => {
     try {
-      const response = await fetch('http://localhost:5000/api/v1/auth/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-
-      if (!response.ok) throw new Error('Registration failed');
-
+      await authService.register(data);
       router.push('/login');
     } catch (error) {
       console.error('Registration error:', error);

@@ -77,7 +77,7 @@ public class MarketDataSourceTests
         var tenantId = TenantId.New();
         var dataSource = MarketDataSource.Create(dataSourceId, tenantId, "Test", "https://test.url", MarketDataSourceType.Binance);
         var jobId = Guid.NewGuid();
-        var job = MarketDataIngestionJob.Create(jobId, dataSourceId, "BTCUSDT", MarketDataType.Ohlcv);
+        var job = MarketDataIngestionJob.Create(jobId, tenantId, dataSourceId, "BTCUSDT", MarketDataType.Ohlcv);
 
         // Act
         dataSource.AddIngestionJob(job);
