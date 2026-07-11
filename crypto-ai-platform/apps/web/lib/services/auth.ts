@@ -1,9 +1,11 @@
-interface LoginRequest {
+import api from "../api";
+
+export interface LoginRequest {
   email: string;
   password: string;
 }
 
-interface LoginResponse {
+export interface LoginResponse {
   userId: string;
   email: string;
   userName: string;
@@ -14,7 +16,7 @@ interface LoginResponse {
   refreshToken: string;
 }
 
-interface RegisterRequest {
+export interface RegisterRequest {
   email: string;
   password: string;
   firstName: string;
@@ -24,24 +26,11 @@ interface RegisterRequest {
 
 export const authService = {
   async login(data: LoginRequest): Promise<LoginResponse> {
-    // Mock authentication for demo
-    if (data.email === 'demo@cryptoai.com' && data.password === 'Demo123!') {
-      return {
-        userId: '1',
-        email: 'demo@cryptoai.com',
-        userName: 'demouser',
-        firstName: 'Demo',
-        lastName: 'User',
-        roles: ['USER'],
-        accessToken: 'mock_access_token_123',
-        refreshToken: 'mock_refresh_token_456',
-      };
-    }
-    throw new Error('Invalid credentials');
+    const response = await api.post<LoginResponse>("/auth/login", data);
+    return response.data;
   },
 
   async register(data: RegisterRequest): Promise<void> {
-    // Mock registration
-    console.log('Registering user:', data);
+    await api.post("/auth/register", data);
   },
 };

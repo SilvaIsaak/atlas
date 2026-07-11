@@ -1,13 +1,22 @@
+import api from "../api";
 import { mockRiskMetrics, mockAlerts } from './mockData';
 
 export const riskService = {
   async getRiskMetrics() {
-    await new Promise(resolve => setTimeout(resolve, 300));
-    return mockRiskMetrics;
+    try {
+      const response = await api.get("/risk");
+      return response.data;
+    } catch (e) {
+      return mockRiskMetrics;
+    }
   },
 
   async getAlerts() {
-    await new Promise(resolve => setTimeout(resolve, 300));
-    return mockAlerts;
+    try {
+      const response = await api.get("/risk/alerts");
+      return response.data;
+    } catch (e) {
+      return mockAlerts;
+    }
   },
 };

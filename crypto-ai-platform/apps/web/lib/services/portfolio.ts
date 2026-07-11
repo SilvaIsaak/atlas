@@ -1,19 +1,38 @@
+import api from "../api";
 import { mockPortfolioAllocation, mockRiskMetrics } from './mockData';
+
+export interface GetDashboardResponse {
+  portfolioValue: number;
+  dailyPnL: number;
+  allocation: { name: string; value: number }[];
+  positions: any[];
+}
 
 export const portfolioService = {
   async getPortfolioValue(): Promise<number> {
-    return new Promise((resolve) => setTimeout(() => resolve(67432.54), 300));
+    try {
+      const dashboard = await api.get<GetDashboardResponse>("/dashboard");
+      return dashboard.data.portfolioValue;
+    } catch (e) {
+      return 67432.54;
+    }
   },
 
   async getDailyPnL(): Promise<number> {
-    return new Promise((resolve) => setTimeout(() => resolve(1234.56), 300));
+    try {
+      const dashboard = await api.get<GetDashboardResponse>("/dashboard");
+      return dashboard.data.dailyPnL;
+    } catch (e) {
+      return 1234.56;
+    }
   },
 
   async getPortfolioAllocation(): Promise<{ name: string; value: number }[]> {
-    return new Promise((resolve) => setTimeout(() => resolve(mockPortfolioAllocation), 400));
-  },
-
-  async getRiskMetrics(): Promise<{ name: string; value: number }[]> {
-    return new Promise((resolve) => setTimeout(() => resolve(mockRiskMetrics), 400));
+    try {
+      const dashboard = await api.get<GetDashboardResponse>("/dashboard");
+      return dashboard.data.allocation;
+    } catch (e) {
+      return mockPortfolioAllocation;
+    }
   },
 };
