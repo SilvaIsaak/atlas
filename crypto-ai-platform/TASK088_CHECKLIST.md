@@ -1,0 +1,13 @@
+# TASK088 Checklist
+- [x] docker/phase0/docker-compose.yml verificado
+- [ ] Containers PostgreSQL/TimescaleDB, Redis, RabbitMQ rodando
+- [ ] dotnet ef tools instalados
+- [ ] dotnet restore executado
+- [ ] dotnet build executado
+- [ ] Migration InitialCreate criada
+- [ ] Migration aplicada
+- [ ] Tabelas validadas
+- [ ] Relacionamentos/índices verificado
+- [ ] TenantId/filtros multi tenant confirmados
+- [ ] TimescaleDB hypertables configurados
+- [ ] API conectando sem erros

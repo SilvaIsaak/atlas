@@ -1,0 +1,12 @@
+# TASK078 Checklist
+- [ ] PostgreSQL running
+- [ ] Connection String configured
+- [ ] Initial Migration created
+- [ ] Migration applied successfully
+- [ ] All tables created
+- [ ] Demo Tenant created
+- [ ] Demo User created
+- [ ] Demo Portfolio created
+- [ ] Demo Strategies created
+- [ ] Demo Market Data inserted
+- [ ] Repository operations validated

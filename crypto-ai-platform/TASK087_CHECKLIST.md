@@ -1,0 +1,11 @@
+# TASK087 Checklist
+- [ ] PostgreSQL installed/available
+- [ ] TimescaleDB available
+- [ ] EF Core Tools installed
+- [ ] Connection string configured
+- [ ] Initial migration created
+- [ ] Migration applied
+- [ ] Tables validated
+- [ ] SeedData implemented
+- [ ] SeedData called on startup
+- [ ] Endpoints tested

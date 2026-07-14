@@ -107,8 +107,7 @@ services:
     volumes:
       - prometheus-data:/prometheus
       - ./config/prometheus.yml:/etc/prometheus/prometheus.yml:ro
-    depends_on:
-      - api
+   
 
   grafana:
     image: grafana/grafana:latest
