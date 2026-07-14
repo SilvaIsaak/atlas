@@ -128,7 +128,7 @@ public class ReproducibilityPackageExtendedConfiguration : IEntityTypeConfigurat
 {
     public void Configure(EntityTypeBuilder<ReproducibilityPackage> builder)
     {
-        builder.OwnsOne(r => r.EnvironmentInfo);
+
         builder.OwnsOne(r => r.Checksum);
 
         builder.HasMany(r => r.EnvironmentSnapshots)

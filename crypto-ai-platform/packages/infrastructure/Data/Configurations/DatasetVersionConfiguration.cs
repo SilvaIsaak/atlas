@@ -20,6 +20,12 @@ public class DatasetVersionConfiguration : IEntityTypeConfiguration<DatasetVersi
         // RLS
         builder.HasQueryFilter(dv => dv.TenantId == ApplicationDbContext.CurrentTenantId);
 
+        // Ignore unconfigured properties for Phase 0
+        builder.Ignore(dv => dv.Hash);
+        builder.Ignore(dv => dv.Statistics);
+        builder.Ignore(dv => dv.Checksum);
+        builder.Ignore(dv => dv.Location);
+
         // Properties
         builder.Property(dv => dv.Version).HasMaxLength(100).IsRequired();
         builder.Property(dv => dv.AssetSymbols).HasJsonConversion();
